@@ -1,22 +1,39 @@
 package com.gtasa.binary;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+import com.gtasa.core.FileSystem;
 
 public class GTA3IMGBinaryIPL {
 	
-	private byte[] ipl;
+	private GTA3IMGDirectory directory;
+	private byte[] bytes;
 	private byte[] identifier = new byte[4];
+	private String ipl;
 	
-	public GTA3IMGBinaryIPL(int offset, int size, byte[] content) {
-		this.ipl = content;
+	public GTA3IMGBinaryIPL(GTA3IMGDirectory directory, byte[] content) {
+		this.directory = directory;
+		this.bytes = content;
 		
 		int index = 0;
-		System.arraycopy(this.ipl, index, this.identifier, 0, this.identifier.length);
+		System.arraycopy(this.bytes, index, this.identifier, 0, this.identifier.length);
 		
-		//System.err.println("Offset: " + offset + ", Size: " + size + " | " + getIdentifier());
+		if (getIdentifier().equals("bnry")) {
+			int sectorSize = this.bytes.length / 16; // for test only
+			this.ipl = String.valueOf(FileSystem.bytesToChars(Arrays.copyOfRange(this.bytes, index, sectorSize)));
+		}
 	}
 
-	public byte[] getIPL() {
+	public GTA3IMGDirectory getDirectory() {
+		return this.directory;
+	}
+	
+	public byte[] getBytes() {
+		return this.bytes;
+	}
+	
+	public String getIPL() {
 		return this.ipl;
 	}
 	
@@ -25,6 +42,6 @@ public class GTA3IMGBinaryIPL {
 	}
 	
 	public int getLength() {
-		return this.ipl.length;
+		return this.bytes.length;
 	}
 }

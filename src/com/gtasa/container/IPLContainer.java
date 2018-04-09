@@ -7,6 +7,8 @@ public class IPLContainer {
 	private String path;
 	private int offset;
 	private int size;
+	private String plainIPL;
+	private String binaryIPL;
 	
 	public IPLContainer() {
 		
@@ -50,5 +52,21 @@ public class IPLContainer {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	public String getPlainIPL() {
+		return this.plainIPL;
+	}
+
+	public void setPlainIPL(String plainIPL) {
+		this.plainIPL = plainIPL;
+	}
+
+	public String getBinaryIPL() {
+		return this.binaryIPL;
+	}
+
+	public void setBinaryIPL(String binaryIPL) {
+		this.binaryIPL = binaryIPL;
 	}
 }

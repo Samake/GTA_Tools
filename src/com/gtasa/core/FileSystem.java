@@ -39,6 +39,11 @@ public class FileSystem {
 		return null;
 	}
 	
+	public static byte[] sortBytes(byte[] data, int offset, int length) {
+		ByteBuffer buffer = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
+	    return buffer.get(buffer.array(), offset, length).array();
+	}
+	
 	public static long readUInt(byte[] data) {
 	    return ByteBuffer.wrap(data)
 	        .order(ByteOrder.LITTLE_ENDIAN)

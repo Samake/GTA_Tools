@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.gtasa.binary.GTA3IMG;
@@ -121,20 +120,6 @@ public class IPLParser {
 		if (imgFile != null) {
 			
 		}
-	}
-	
-	public static String getBinaryResult(int offset, int size) throws Exception {
-		if (imgFile != null) {
-			byte[] result = Arrays.copyOfRange(imgFile.getBytes(), offset, offset + size);
-			
-			System.err.println("***START***\n");
-			System.err.println(new String(result, "UTF-8"));
-			System.err.println("\n***End***");
-			
-			return new String(result, "UTF-8");
-		}
-		
-		return "";
 	}
 	
 	public static GTA3IMG getIMG() {

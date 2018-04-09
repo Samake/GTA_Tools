@@ -1,16 +1,14 @@
 package com.gtasa.gui;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.gtasa.core.FileSystem;
 import com.gtasa.core.IPLParser;
 import com.gtasa.main.Main;
 import com.gtasa.plain.GTALibrary;
 import com.gtasa.plain.GTAPlainIPL;
 import com.gtasa.binary.GTA3IMG;
-import com.gtasa.binary.GTA3IMGDirectory;
+import com.gtasa.binary.GTA3IMGBinaryIPL;
 import com.gtasa.container.IPLContainer;
 
 import javafx.beans.value.ObservableValue;
@@ -107,6 +105,7 @@ public class GUISources {
 				container.setType("Plain-Text");
 				container.setName(ipl.getName());
 				container.setPath(ipl.getPath());
+				container.setPlainIPL(ipl.getIPL());
 				
 				iplContainers.put(ipl.getName(), container);
 			}
@@ -115,7 +114,7 @@ public class GUISources {
 		GTA3IMG img = IPLParser.getIMG();
 		
 		if (img != null) {
-			for (GTA3IMGDirectory directory : img.getDirectories()) {
+			for (GTA3IMGBinaryIPL ipl : img.getIPLs()) {
 				VBox resultBox = new VBox();
 				resultBox.setSpacing(4);
 				resultBox.setAlignment(Pos.TOP_LEFT);
@@ -144,7 +143,7 @@ public class GUISources {
 				thirdRow.setAlignment(Pos.TOP_LEFT);
 				
 				Text offsetLabel = new Text("Offset: ");
-				Text offsetValue = new Text(String.valueOf(directory.getOffset()));
+				Text offsetValue = new Text(String.valueOf(ipl.getDirectory().getOffset()));
 				
 				thirdRow.getChildren().addAll(offsetLabel, offsetValue);
 				
@@ -153,23 +152,24 @@ public class GUISources {
 				fourthRow.setAlignment(Pos.TOP_LEFT);
 				
 				Text sizeLabel = new Text("Size: ");
-				Text sizeValue = new Text(String.valueOf(directory.getStreamingSize()));
+				Text sizeValue = new Text(String.valueOf(ipl.getDirectory().getStreamingSize()));
 				
 				fourthRow.getChildren().addAll(sizeLabel, sizeValue);
 				
 				resultBox.getChildren().addAll(firstRow, secondRow, thirdRow, fourthRow);
 
-				TitledPane resultPane = new TitledPane(directory.getName(), resultBox);
+				TitledPane resultPane = new TitledPane(ipl.getDirectory().getName(), resultBox);
 				accordion.getPanes().add(resultPane);
 				
 				IPLContainer container = new IPLContainer();
 				container.setType("Binary");
-				container.setName(directory.getName());
+				container.setName(ipl.getDirectory().getName());
 				container.setPath("gta3.img");
-				container.setOffset(directory.getOffset());
-				container.setSize(directory.getStreamingSize());
+				container.setOffset(ipl.getDirectory().getOffset());
+				container.setSize(ipl.getDirectory().getStreamingSize());
+				container.setBinaryIPL(ipl.getIPL());
 				
-				iplContainers.put(directory.getName(), container);
+				iplContainers.put(ipl.getDirectory().getName(), container);
 			}
 		}
 		
@@ -209,13 +209,13 @@ public class GUISources {
             	if (selectedIPL != null) {
             		if (selectedIPL.getType().equals("Plain-Text")) {
             			try {
-							GUIResultTab.generateIPLResult(selectedIPL.getName(), FileSystem.openIPL(selectedIPL.getPath()));
-						} catch (IOException e) {
+							GUIResultTab.generateIPLResult(selectedIPL.getName(), selectedIPL.getPlainIPL());
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
             		} else {
             			try {
-							GUIResultTab.generateIPLResult(selectedIPL.getName(), IPLParser.getBinaryResult(selectedIPL.getOffset(), selectedIPL.getSize()));
+							GUIResultTab.generateIPLResult(selectedIPL.getName(), selectedIPL.getBinaryIPL());
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

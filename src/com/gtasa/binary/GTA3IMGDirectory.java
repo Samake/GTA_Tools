@@ -8,6 +8,7 @@ import com.sun.jna.platform.win32.WinDef.DWORD;
 import com.sun.jna.platform.win32.WinDef.WORD;
 
 public class GTA3IMGDirectory {
+	private final int SECTORSIZE = 2048;
 	
 	private byte[] directory = new byte[32];
 	private DWORD offset = new DWORD();
@@ -36,15 +37,15 @@ public class GTA3IMGDirectory {
 	}
 	
 	public int getOffset() {
-		return this.offset.intValue();
+		return this.offset.intValue() * SECTORSIZE;
 	}
 	
 	public int getStreamingSize() {
-		return this.streamingSize.intValue();
+		return this.streamingSize.intValue() * SECTORSIZE;
 	}
 	
 	public int getSizeInArchive() {
-		return this.sizeInArchive.intValue();
+		return this.sizeInArchive.intValue() * SECTORSIZE;
 	}
 	
 	public String getName() throws Exception {
