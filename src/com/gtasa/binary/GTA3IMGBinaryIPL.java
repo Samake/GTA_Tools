@@ -1,9 +1,6 @@
 package com.gtasa.binary;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
-import com.sun.jna.platform.win32.WinDef.DWORD;
 
 public class GTA3IMGBinaryIPL {
 	
@@ -16,7 +13,7 @@ public class GTA3IMGBinaryIPL {
 		int index = 0;
 		System.arraycopy(this.ipl, index, this.identifier, 0, this.identifier.length);
 		
-		System.err.println("Offset: " + offset + ", Size: " + size + " | " + getIdentifier());
+		//System.err.println("Offset: " + offset + ", Size: " + size + " | " + getIdentifier());
 	}
 
 	public byte[] getIPL() {

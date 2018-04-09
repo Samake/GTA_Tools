@@ -1,11 +1,8 @@
 package com.gtasa.binary;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.gtasa.core.FileSystem;
 
 public class GTA3IMG {
 	
@@ -24,7 +21,7 @@ public class GTA3IMG {
 		this.header = new GTA3IMGHeader(Arrays.copyOfRange(this.img, 0, 8));
 		
 		if (this.header != null) {
-			//decompile();
+			decompile();
 		}
 	}
 	
@@ -42,11 +39,11 @@ public class GTA3IMG {
 			}
 			
 			for (GTA3IMGDirectory directory : this.directoriesList) {
-				System.err.println("\n***** " + directory.getOffset() + ", " + directory.getStreamingSize() + "\n");
-				byte[] test = Arrays.copyOfRange(this.img, directory.getOffset(), directory.getOffset() + directory.getStreamingSize());
-				System.err.println(FileSystem.bytesToChars(test));
-				System.err.println("\n*****\n");
-				//this.iplList.add(new GTA3IMGBinaryIPL(directory.getOffset(), directory.getStreamingSize(), Arrays.copyOfRange(this.img, directory.getOffset(), directory.getOffset() + directory.getStreamingSize())));
+				//System.err.println("\n***** " + directory.getOffset() + ", " + directory.getStreamingSize() + "\n");
+				//byte[] test = Arrays.copyOfRange(this.img, directory.getOffset(), directory.getOffset() + directory.getStreamingSize());
+				//System.err.println(FileSystem.bytesToChars(test));
+				//System.err.println("\n*****\n");
+				this.iplList.add(new GTA3IMGBinaryIPL(directory.getOffset(), directory.getStreamingSize(), Arrays.copyOfRange(this.img, directory.getOffset(), directory.getOffset() + directory.getStreamingSize())));
 			}
 		}
 	}
