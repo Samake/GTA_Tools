@@ -23,6 +23,8 @@ public class GUI {
 	
 	private static Button luaButton = new Button();
 	private static Button plainButton = new Button();
+	
+	private static GUISources guiSources;
 
 	public static Node getContent(Stage stage) {
 		DirectoryChooser chooser = new DirectoryChooser();
@@ -105,6 +107,10 @@ public class GUI {
             		IPLParser.start();
             		setButtons();
             		
+            		if (guiSources == null) {
+            			guiSources = new GUISources();
+            		}
+            		
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -118,7 +124,7 @@ public class GUI {
  
             @Override
             public void handle(ActionEvent event) {
-            	GUIresult.generatePlainResult();
+            	GUIResultTab.generatePlainResult();
             }
         });
 		
@@ -129,7 +135,7 @@ public class GUI {
  
             @Override
             public void handle(ActionEvent event) {
-            	GUIresult.generateLuaResult();
+            	GUIResultTab.generateLuaResult();
             }
         });
 		

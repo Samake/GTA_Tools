@@ -43,6 +43,7 @@ public class IPLParser {
 		if (imgFile == null) {
 			GUIConsole.output("Decompiling gta3.img...");
 			Path path = Paths.get(PropertiesHandler.getGTAPath() + Common.GTA_SA_GTA_3_IMG);
+			
 			imgFile = new GTA3IMG(Files.readAllBytes(path));
 			
 			if (imgFile != null) {
@@ -119,6 +120,14 @@ public class IPLParser {
 		if (imgFile != null) {
 			
 		}
+	}
+	
+	public static GTA3IMG getIMG() {
+		return imgFile;
+	}
+	
+	public static GTALibrary getLibrary() {
+		return library;
 	}
 	
 	public static List<CObject> getSearchResults() {

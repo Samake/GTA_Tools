@@ -1,18 +1,22 @@
 package com.gtasa.binary;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+import com.sun.jna.platform.win32.WinDef.DWORD;
 
 public class GTA3IMGBinaryIPL {
 	
 	private byte[] ipl;
 	private byte[] identifier = new byte[4];
 	
-	public GTA3IMGBinaryIPL(byte[] content) {
+	public GTA3IMGBinaryIPL(int offset, int size, byte[] content) {
 		this.ipl = content;
 		
 		int index = 0;
 		System.arraycopy(this.ipl, index, this.identifier, 0, this.identifier.length);
 		
-		System.err.println(getIdentifier());
+		System.err.println("Offset: " + offset + ", Size: " + size + " | " + getIdentifier());
 	}
 
 	public byte[] getIPL() {
@@ -20,7 +24,7 @@ public class GTA3IMGBinaryIPL {
 	}
 	
 	public String getIdentifier() {
-		return new String(this.identifier);
+		return new String(this.identifier, StandardCharsets.ISO_8859_1);
 	}
 	
 	public int getLength() {

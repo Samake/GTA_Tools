@@ -1,5 +1,6 @@
 package com.gtasa.binary;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import com.gtasa.core.FileSystem;
@@ -47,7 +48,7 @@ public class GTA3IMGDirectory {
 	}
 	
 	public String getName() throws Exception {
-		return new String(this.name, "UTF-8");
+		return new String(this.name, StandardCharsets.ISO_8859_1);
 	}
 	
 	public int getLength() {

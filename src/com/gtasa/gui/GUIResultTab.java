@@ -11,7 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 
-public class GUIresult {
+public class GUIResultTab {
 	
 	public static void generatePlainResult() {
 		List<CObject> objects = IPLParser.getSearchResults();
@@ -65,9 +65,14 @@ public class GUIresult {
 		Main.addTab(buildGUI("LUA result", result));
 	}
 	
+	public static void generateIPLResult(String name, String content) {
+		Main.addTab(buildGUI(name, content));
+	}
+	
 	private static Tab buildGUI(String title, String result) {
 		Tab tab = new Tab();
         tab.setText(title);
+        tab.setId(title);
         
         VBox box = new VBox();
         box.setSpacing(4);

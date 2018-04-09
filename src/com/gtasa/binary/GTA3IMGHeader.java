@@ -1,5 +1,6 @@
 package com.gtasa.binary;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import com.gtasa.core.FileSystem;
@@ -26,7 +27,7 @@ public class GTA3IMGHeader {
 	}
 	
 	public String getVersion() {
-		return new String(this.version);
+		return new String(this.version, StandardCharsets.ISO_8859_1);
 	}
 	
 	public int getEntries() {

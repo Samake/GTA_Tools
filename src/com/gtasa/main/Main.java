@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  
 public class Main extends Application {
 	private final String appTitle = "GTA:SA Model Search by Sam@ke";
-	private final String appVersion = "v0.1.2b";
+	private final String appVersion = "v0.1.3a";
 	
 	private static Scene scene;
 	private static TabPane tabPane;
@@ -42,6 +42,7 @@ public class Main extends Application {
         
         Tab tab = new Tab();
         tab.setText("Main");
+        tab.setId("Main");
         tab.setContent(GUI.getContent(primaryStage));
         tab.setClosable(false);
         tabPane.getTabs().add(tab);
@@ -58,7 +59,19 @@ public class Main extends Application {
     
     public static void addTab(Tab tab) {
     	if (tab != null) {
-    		tabPane.getTabs().add(tab);
+    		boolean isAdded = false;
+    		
+    		for (Tab lTab : tabPane.getTabs()) {
+    			if (lTab.getId().equals(tab.getId())) {
+    				int index = tabPane.getTabs().indexOf(lTab);
+    				tabPane.getTabs().set(index, tab);
+    				isAdded = true;
+    			}
+    		}
+    		
+    		if (isAdded == false) {
+    			tabPane.getTabs().add(tab);
+    		}
     	}
     }
     
