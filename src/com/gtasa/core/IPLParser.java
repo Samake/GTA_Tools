@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gtasa.binary.GTA3IMG;
+import com.gtasa.binary.IMG;
 import com.gtasa.container.CObject;
 import com.gtasa.defines.Common;
 import com.gtasa.gui.GUIConsole;
@@ -19,7 +19,7 @@ import com.gtasa.plain.GTAPlainIPL;
 
 public class IPLParser {
 	
-	private static GTA3IMG imgFile;
+	private static IMG imgFile;
 	private static GTALibrary library;
 	
 	private static String[] modelIDs;
@@ -44,7 +44,7 @@ public class IPLParser {
 			GUIConsole.output("Decompiling gta3.img...");
 			Path path = Paths.get(PropertiesHandler.getGTAPath() + Common.GTA_SA_GTA_3_IMG);
 			
-			imgFile = new GTA3IMG(Files.readAllBytes(path));
+			imgFile = new IMG(Files.readAllBytes(path));
 			
 			if (imgFile != null) {
 				GUIConsole.output("gta3.img decompiled sucessfully!");
@@ -122,7 +122,7 @@ public class IPLParser {
 		}
 	}
 	
-	public static GTA3IMG getIMG() {
+	public static IMG getIMG() {
 		return imgFile;
 	}
 	

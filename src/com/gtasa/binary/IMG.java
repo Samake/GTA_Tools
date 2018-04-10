@@ -1,23 +1,24 @@
 package com.gtasa.binary;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.gtasa.core.FileSystem;
 
-public class GTA3IMG {
+public class IMG {
 	
 	private final int DIRECTORYSIZE = 32;
 	
 	private byte[] img;
-	private GTA3IMGHeader header;
-	private List<GTA3IMGBinaryIPL> iplList = new ArrayList<GTA3IMGBinaryIPL>();
+	private IMGHeader header;
+	private List<BinaryIPL> iplList = new ArrayList<BinaryIPL>();
 	
-	public GTA3IMG(byte[] content) throws Exception {
+	public IMG(byte[] content) throws Exception {
 		this.img = FileSystem.sortBytes(content, 0, content.length);
 
-		this.header = new GTA3IMGHeader(Arrays.copyOfRange(this.img, 0, 8));
+		this.header = new IMGHeader(Arrays.copyOfRange(this.img, 0, 8));
 		
 		if (this.header != null) {
 			decompile();
@@ -29,11 +30,15 @@ public class GTA3IMG {
 			int index = this.header.getLength();
 			
 			for (int i = 0; i < this.header.getEntries(); i++) {
-				GTA3IMGDirectory directory = new GTA3IMGDirectory(Arrays.copyOfRange(this.img, index, index + DIRECTORYSIZE));
+				IMGDirectory directory = new IMGDirectory(Arrays.copyOfRange(this.img, index, index + DIRECTORYSIZE));
 				index = index + DIRECTORYSIZE;
 
 				if (directory.getName().contains(".ipl")) {
-					this.iplList.add(new GTA3IMGBinaryIPL(directory, Arrays.copyOfRange(this.img, directory.getOffset(), directory.getOffset() + directory.getStreamingSize())));
+					byte[] iplFile = Arrays.copyOfRange(this.img, directory.getOffset(), directory.getOffset() + directory.getStreamingSize());
+					
+					if (new String(Arrays.copyOfRange(iplFile, 0, 4), StandardCharsets.ISO_8859_1).equals("bnry")) {
+						this.iplList.add(new BinaryIPL(directory, iplFile));
+					}
 				}
 			}
 		}
@@ -43,11 +48,11 @@ public class GTA3IMG {
 		return this.img;
 	}
 	
-	public GTA3IMGHeader getHeader() {
+	public IMGHeader getHeader() {
 		return this.header;
 	}
 	
-	public List<GTA3IMGBinaryIPL> getIPLs() {
+	public List<BinaryIPL> getIPLs() {
 		return this.iplList;
 	}
 	

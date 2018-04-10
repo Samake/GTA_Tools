@@ -6,13 +6,13 @@ import java.util.Arrays;
 import com.gtasa.core.FileSystem;
 import com.sun.jna.platform.win32.WinDef.DWORD;
 
-public class GTA3IMGHeader {
+public class IMGHeader {
 	
 	private byte[] header = new byte[8];
 	private byte[] version = new byte[4];
 	private DWORD entries = new DWORD();
 	
-	public GTA3IMGHeader(byte[] content) {
+	public IMGHeader(byte[] content) {
 		int index = 0;
 		
 		System.arraycopy(content, index, this.header, 0, this.header.length);

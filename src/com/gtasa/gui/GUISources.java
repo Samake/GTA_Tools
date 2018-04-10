@@ -7,8 +7,8 @@ import com.gtasa.core.IPLParser;
 import com.gtasa.main.Main;
 import com.gtasa.plain.GTALibrary;
 import com.gtasa.plain.GTAPlainIPL;
-import com.gtasa.binary.GTA3IMG;
-import com.gtasa.binary.GTA3IMGBinaryIPL;
+import com.gtasa.binary.IMG;
+import com.gtasa.binary.BinaryIPL;
 import com.gtasa.container.IPLContainer;
 
 import javafx.beans.value.ObservableValue;
@@ -111,10 +111,10 @@ public class GUISources {
 			}
 		}
 		
-		GTA3IMG img = IPLParser.getIMG();
+		IMG img = IPLParser.getIMG();
 		
 		if (img != null) {
-			for (GTA3IMGBinaryIPL ipl : img.getIPLs()) {
+			for (BinaryIPL ipl : img.getIPLs()) {
 				VBox resultBox = new VBox();
 				resultBox.setSpacing(4);
 				resultBox.setAlignment(Pos.TOP_LEFT);

@@ -7,7 +7,7 @@ import com.gtasa.core.FileSystem;
 import com.sun.jna.platform.win32.WinDef.DWORD;
 import com.sun.jna.platform.win32.WinDef.WORD;
 
-public class GTA3IMGDirectory {
+public class IMGDirectory {
 	private final int SECTORSIZE = 2048;
 	
 	private byte[] directory = new byte[32];
@@ -16,7 +16,7 @@ public class GTA3IMGDirectory {
 	private WORD sizeInArchive = new WORD();
 	private byte[] name = new byte[24];
 	
-	public GTA3IMGDirectory(byte[] content) {
+	public IMGDirectory(byte[] content) {
 		int index = 0;
 		System.arraycopy(content, index, this.directory, 0, this.directory.length);
 		
