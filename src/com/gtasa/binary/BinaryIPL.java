@@ -42,7 +42,8 @@ public class BinaryIPL {
 	}
 	
 	private void buildIPL() {
-		this.ipl = this.ipl + "inst";
+		this.ipl = this.ipl + "# this binary ipl file was parsed from gta3.img\n\n";
+		this.ipl = this.ipl + "inst\n";
 		
 		for (CBinaryObject object : this.iplObjects) {
 			this.ipl = this.ipl + object.getModelID() + ", " + 
