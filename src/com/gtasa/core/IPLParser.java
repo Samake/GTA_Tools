@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gtasa.binary.BinaryIPL;
 import com.gtasa.binary.IMG;
 import com.gtasa.container.CObject;
 import com.gtasa.defines.Common;
@@ -34,20 +35,20 @@ public class IPLParser {
 			library = new GTALibrary(PropertiesHandler.getGTAPath() + Common.GTA_SA_MAPS);
 			
 			if (library != null) {
-				GUIConsole.output("GTA Library loaded sucessfully!");
+				GUIConsole.output("GTA Library were loaded sucessfully!");
 			} else {
 				GUIConsole.output("Loading GTA Library FAILED!");
 			}
 		}
 		
 		if (imgFile == null) {
-			GUIConsole.output("Decompiling gta3.img...");
+			GUIConsole.output("Loading gta3.img...");
 			Path path = Paths.get(PropertiesHandler.getGTAPath() + Common.GTA_SA_GTA_3_IMG);
 			
 			imgFile = new IMG(Files.readAllBytes(path));
 			
 			if (imgFile != null) {
-				GUIConsole.output("gta3.img decompiled sucessfully!");
+				GUIConsole.output("gta3.img were decompiled sucessfully!");
 			} else {
 				GUIConsole.output("Decompiling gta3.img FAILED!");
 			}
@@ -101,7 +102,7 @@ public class IPLParser {
 							
 							for (int k=0; k < modelIDs.length; k++) {
 								if (modelIDs[k].trim().equals(modelID)) {
-									float[] euler = Quaternion.convertToEulerDegrees(rotX, rotY, rotZ, rotW);
+									float[] euler = Quaternion.toEulerAngles(rotX, rotY, rotZ, rotW);
 									
 									parsedObjects.add(new CObject(modelID, modelName, interior, new Vector3(posX, posY, posZ), new Vector3(euler[0], euler[1], euler[2]), lod));
 									count++;
@@ -118,7 +119,55 @@ public class IPLParser {
 		}
 		
 		if (imgFile != null) {
-			
+			for (BinaryIPL file : imgFile.getIPLs()) {
+				int count = 0;
+				
+				String fileContent = file.getIPL();
+				
+				int startIndex = fileContent.indexOf("inst") + 4;
+				int endIndex = fileContent.indexOf("end");
+				
+				String iplObjectBlock = fileContent.substring(startIndex, endIndex);
+				
+				BufferedReader reader = new BufferedReader(new StringReader(iplObjectBlock));
+				
+				String line;
+				
+				while ((line = reader.readLine()) != null) {
+					if (line.length() > 0) {
+						String[] objectArray = line.split(",");
+		        	  
+						if (objectArray.length == 11) {
+							//ID#, 	DFF Name, 		Interior#, 	X-Coord, 	Y-Coord, 	Z-Coord, 	RotationX, 	RotationY, 	RotationZ, 		RotationR, 		LOD
+							//709,	sm_vegvbbigbrn, 0, 			1450.21875, -553.28125, 78.9140625, 0, 			0, 			-0.7086663246, 	0.7055437565, 	-1
+							String modelID = objectArray[0].trim();
+							String modelName = objectArray[1].trim();
+							String interior = objectArray[2].trim();
+							float posX = Float.parseFloat(objectArray[3].trim());
+							float posY = Float.parseFloat(objectArray[4].trim());
+							float posZ = Float.parseFloat(objectArray[5].trim());
+							float rotX = Float.parseFloat(objectArray[6].trim());
+							float rotY = Float.parseFloat(objectArray[7].trim());
+							float rotZ = Float.parseFloat(objectArray[8].trim());
+							float rotW = Float.parseFloat(objectArray[9].trim());
+							String lod = objectArray[10].trim();
+							
+							for (int k=0; k < modelIDs.length; k++) {
+								if (modelIDs[k].trim().equals(modelID)) {
+									float[] euler = Quaternion.toEulerAngles(rotX, rotY, rotZ, rotW);
+									
+									parsedObjects.add(new CObject(modelID, modelName, interior, new Vector3(posX, posY, posZ), new Vector3(euler[0], euler[1], euler[2]), lod));
+									count++;
+								}
+				        	}
+						}
+					}
+				}
+				
+				if (count > 0) {
+					GUIConsole.output(count + " objects were found in binary ipl " + file.getDirectory().getName() + " and added to list");
+				}
+			}
 		}
 	}
 	

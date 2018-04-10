@@ -26,8 +26,8 @@ public class BinaryIPL {
 		index = index + this.identifier.length;
 		
 		this.header = new BinaryIPLHeader(Arrays.copyOfRange(this.bytes, index, index + HEADERSIZE));
-		index = index + HEADERSIZE + 40;
-		
+
+		index = this.header.getItemOffset();
 		int blockSize = 40;
 		
 		if (this.header != null) {
@@ -37,6 +37,28 @@ public class BinaryIPL {
 				this.iplObjects.add(new CBinaryObject(objectBlock));
 			}
 		}
+		
+		buildIPL();
+	}
+	
+	private void buildIPL() {
+		this.ipl = this.ipl + "inst";
+		
+		for (CBinaryObject object : this.iplObjects) {
+			this.ipl = this.ipl + object.getModelID() + ", " + 
+								"Dummy" + ", " + 
+								object.getInterior() + ", " + 
+								object.getPosX() + ", " + 
+								object.getPosY() + ", " + 
+								object.getPosZ() + ", " + 
+								object.getRotX() + ", " + 
+								object.getRotY() + ", " + 
+								object.getRotZ() + ", " + 
+								object.getRotW() + ", " + 
+								object.getLOD() + "\n";
+		}
+		
+		this.ipl = this.ipl + "end";
 	}
 
 	public IMGDirectory getDirectory() {

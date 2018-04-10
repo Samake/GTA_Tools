@@ -15,6 +15,7 @@ public class IMGDirectory {
 	private WORD streamingSize = new WORD();
 	private WORD sizeInArchive = new WORD();
 	private byte[] name = new byte[24];
+	private String formattedName;
 	
 	public IMGDirectory(byte[] content) {
 		int index = 0;
@@ -30,6 +31,9 @@ public class IMGDirectory {
 		index = index + WORD.SIZE;
 		
 		System.arraycopy(content, index, this.name, 0, this.name.length);
+		
+		String[] nameParts = new String(this.name, StandardCharsets.ISO_8859_1).split(".ipl");
+		this.formattedName = nameParts[0] + ".ipl";
 	}
 
 	public byte[] getDirectory() {
@@ -48,8 +52,8 @@ public class IMGDirectory {
 		return this.sizeInArchive.intValue() * SECTORSIZE;
 	}
 	
-	public String getName() throws Exception {
-		return new String(this.name, StandardCharsets.ISO_8859_1);
+	public String getName() {
+		return this.formattedName;
 	}
 	
 	public int getLength() {

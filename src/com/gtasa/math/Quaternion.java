@@ -4,7 +4,7 @@ import org.apache.commons.math3.util.FastMath;
 
 public class Quaternion {
 	
-	public static float[] convertToEulerDegrees(float x, float y, float z, float w) {
+	public static float[] toEulerAngles(float x, float y, float z, float w) {
 		float[] angles = new float[3];
 		
         float sqw = w * w;

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  
 public class Main extends Application {
 	private final String appTitle = "GTA:SA Model Search by Sam@ke";
-	private final String appVersion = "v0.1.3a";
+	private final String appVersion = "v0.2.2b";
 	
 	private static Scene scene;
 	private static TabPane tabPane;

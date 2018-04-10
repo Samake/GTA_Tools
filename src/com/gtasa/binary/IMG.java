@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.gtasa.core.FileSystem;
+import com.gtasa.gui.GUIConsole;
 
 public class IMG {
 	
@@ -21,7 +22,11 @@ public class IMG {
 		this.header = new IMGHeader(Arrays.copyOfRange(this.img, 0, 8));
 		
 		if (this.header != null) {
+			GUIConsole.output("Buffering binary ipl files from gta3.img");
+			
 			decompile();
+			GUIConsole.output(this.iplList.size() + " IPL files were decompiled");
+			
 		}
 	}
 	

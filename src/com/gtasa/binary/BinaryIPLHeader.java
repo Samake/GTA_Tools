@@ -14,6 +14,7 @@ public class BinaryIPLHeader {
 	private DWORD enexCount = new DWORD();
 	private DWORD parkedCars = new DWORD();
 	private DWORD pickCount = new DWORD();
+	private DWORD itemOffset = new DWORD();
 	
 	public BinaryIPLHeader(byte[] bytes) {
 		this.content = bytes;
@@ -35,6 +36,9 @@ public class BinaryIPLHeader {
 		index = index + DWORD.SIZE;
 		
 		this.pickCount.setValue(FileSystem.readUInt(Arrays.copyOfRange(this.content, index, index + DWORD.SIZE)));
+		index = index + DWORD.SIZE;
+		
+		this.itemOffset.setValue(FileSystem.readUInt(Arrays.copyOfRange(this.content, index, index + DWORD.SIZE)));
 		index = index + DWORD.SIZE;
 	}
 	
@@ -64,5 +68,9 @@ public class BinaryIPLHeader {
 	
 	public int getPickCount() {
 		return this.pickCount.intValue();
+	}
+	
+	public int getItemOffset() {
+		return this.itemOffset.intValue();
 	}
 }
