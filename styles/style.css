@@ -1,0 +1,362 @@
+.tab-label {
+	-fx-font-size: 12px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #333333;
+	-fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+	-fx-background-color: linear-gradient(aliceblue, lightslategray);
+}
+
+.label {
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+}
+
+.label > .tool-bar {
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: black;
+}
+
+.button .text {
+	-fx-effect: dropshadow(one-pass-box , rgba(0, 0, 0, 0.8), 0, 0.0 , 0 , -1 );
+}
+
+.button {
+	-fx-background-color: rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.8),#090a0c,
+		linear-gradient(#4a5661 0%, #1f2429 20%, #1f242a 100%), linear-gradient(#242a2e,    #23282e),
+		radial-gradient(center 50% 0%, radius 100%, rgba(135,142,148,0.9), rgba(255,255,255,0));
+	-fx-background-radius: 7, 6, 5, 4, 3, 5;
+	-fx-font-family: "Arial";
+	-fx-font-size: 12;
+	-fx-text-fill: linear-gradient(white, #d0d0d0);
+}
+
+.button-plot {
+	-fx-text-fill: red;
+}
+
+.button:hover {
+	-fx-background-color:
+		rgba(255, 255, 255, 0.08),
+		rgba(0, 0, 0, 0.8),
+		#090a0c,
+		linear-gradient(#4a5661 0%, #1f2429 20%, #1f242a 100%),
+		linear-gradient(#3f4950, #23282e),
+		radial-gradient(center 50% 0%, radius 100%, rgba(135,142,148,0.9),
+		rgba(255,255,255,0));
+}
+
+.button:focused {
+	-fx-background-color:
+		rgba(255, 255, 255, 0.08),
+		rgba(0, 0, 0, 0.8),
+		#090a0c,
+		linear-gradient(#4a5661 0%, #1f2429 20%, #1f242a 100%),
+		linear-gradient(#3f4950, #4d8d4d),
+		radial-gradient(center 50% 0%, radius 100%, rgba(135,142,148,0.9),
+		rgba(255,255,255,0));
+}
+
+.text-field {
+	-fx-font-size: 11;
+	-fx-background-color: rgba(255, 255, 255, 0.3), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8) 50%), rgb(218, 226, 224);
+	-fx-background-insets: 0 0 -1 0, 0, 1.0;
+	-fx-background-radius: 8, 5, 8;
+	-fx-padding: 6 5 4 5;
+	-fx-effect: innershadow( gaussian, rgba(0, 0, 0, 0.8), 5, 0, 0, 2 );
+	-fx-font-family: "Arial";
+}
+
+.text-field:focused:focused {
+	-fx-background-color:
+	   rgb(235, 235, 235),
+	   rgb(0, 0, 0),
+	   rgb(255, 255, 255);
+}
+
+.text-area {
+	-fx-font-size: 11;
+	-fx-background-color: rgba(255, 255, 255, 0.5), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8) 50%), rgb(218, 226, 224);
+	-fx-background-insets: 0 0 -1 0, 0, 1.5;
+	-fx-background-radius: 10, 5, 10;
+	-fx-padding: 3 2 3 2;
+	-fx-effect: innershadow( gaussian, rgba(0, 0, 0, 0.8), 15, 0, 0, 2 );
+	-fx-font-family: "Arial";
+}
+
+.check-box {
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+	-fx-effect: dropshadow( one-pass-box , rgba(0, 0, 0, 0.6), 0, 0.0 , 0 , 1 );
+}
+
+.combo-box, .choice-box {
+	-fx-font-size: 11;
+	-fx-background-color: rgba(255, 255, 255, 0.3), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8) 50%), rgb(218, 226, 224);
+	-fx-background-insets: 0 0 -1 0, 0, 1.5;
+	-fx-background-radius: 6, 5, 4;
+	-fx-effect: innershadow( gaussian, rgba(0, 0, 0, 0.8), 5, 0, 0, 2 );
+	-fx-font-family: "Arial";
+	-fx-text-fill: black;
+}
+
+.radio-button {
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+}
+
+.tool-bar{
+	-fx-background-color: linear-gradient(aliceblue, lightslategray);
+	-fx-text-fill: black;
+}
+
+.choice-box .context-menu { 
+	-fx-background-color: #1d1d1d;
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+}
+
+
+.choice-box .menu-item:focused { 
+	-fx-background-color: orange; 
+}
+
+
+.choice-box .menu-item > .label { 
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+}
+
+
+.choice-box .menu-item:focused > .label { 
+	-fx-text-fill: black; 
+}
+
+
+.choice-box {
+	-fx-background-color:  #1d1d1d;
+	-fx-effect: innershadow( gaussian, rgba(0, 0, 0, 0.8), 5, 0, 0, 2 );
+	-fx-font-family: "Arial";
+	-fx-font-size: 11pt;
+}
+
+.choice-box > .label { 
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+}
+
+
+.menu-bar {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+
+.context-menu {
+    -fx-background-color: derive(#1d1d1d, 50%);
+}
+
+
+.menu-bar .label {
+	-fx-font-family: "Arial";
+	-fx-font-size: 9;
+    -fx-text-fill: white;
+    -fx-opacity: 1.0;
+}
+
+
+.menu .left-container {
+    -fx-background-color: black;
+}
+
+.tab-pane {
+	-fx-background-color: #1f1f1f;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #1f1f1f;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #1c1c2d;
+    -fx-background-radius: 0.1;
+    -fx-padding: 5 10 10 10;
+}
+
+.tab-pane .tab:selected{
+	-fx-background-color: #1f1f2f;
+	-fx-focus-color: transparent;
+}
+
+.tab-pane .tab-label {
+	-fx-background-color: #2d2d2d;
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightblue;
+}
+
+.accordion {
+    -fx-background-color: #1d1d1d;
+    -fx-background: #1d1d1d;
+}
+
+.accordion .titled-pane > *.content{
+    -fx-background-color: #1d1d1d;
+    -fx-background: #1d1d1d;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #2d2d2d;
+    -fx-background: #2d2d2d;
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+	-fx-padding: 4 5 4 5;
+}
+
+.titled-pane {
+    -fx-background-color: #2d2d2d;
+    -fx-background: #2d2d2d;
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+	-fx-padding: 4 5 4 5;
+}
+
+.titled-pane:hover {
+    -fx-background-color: #2d2d2d;
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: white;
+	-fx-padding: 4 5 4 5;
+}
+
+.titled-pane:pressed {
+    -fx-background-color: #2d2d2d;
+	-fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: green;
+	-fx-padding: 4 5 4 5;
+}
+
+.scroll-pane {
+    -fx-background-color: #1d1d1d;
+    -fx-background: #1d1d1d;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: #1d1d1d;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color: transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track, .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb {
+    -fx-background-color: lightgreen;
+    -fx-background-radius: 5em;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: #86bd9a;
+    -fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: black;
+}
+
+.list-cell:even {
+    -fx-background-color: #2d2d2d;
+    -fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+}
+
+.list-cell:odd {
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: lightgreen;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #869abd;
+    -fx-font-family: "Arial";
+	-fx-font-size: 11;
+	-fx-text-fill: black;
+}
+
+#HOVERTEXT {
+	-fx-font-family: "Arial Bold";
+	-fx-font-size: 14pt;
+    -fx-fill: white;
+    -fx-opacity: 0.9;
+}
+
+
+#HOVERTEXT:hover {
+	-fx-font-family: "Arial Bold";
+	-fx-font-size: 14pt;
+    -fx-fill: yellow;
+    -fx-opacity: 1.0;
+}
+
+#TEXTSMALL {
+	-fx-font-family: "Arial Bold";
+	-fx-font-size: 9pt;
+    -fx-fill: lightblue;
+    -fx-opacity: 0.9;
+}
+
+#BOLDTEXTSMALL {
+	-fx-font-family: "Arial Bold";
+	-fx-font-size: 9pt;
+    -fx-fill: lightgreen;
+    -fx-opacity: 0.9;
+}
+
+#BOLDINFOTEXTSMALL {
+	-fx-font-family: "Arial Bold";
+	-fx-font-size: 8pt;
+    -fx-fill: darkgrey;
+    -fx-opacity: 0.9;
+}
+
+#BOLDTEXT {
+	-fx-font-family: "Arial Bold";
+	-fx-font-size: 11pt;
+    -fx-fill: white;
+    -fx-opacity: 0.9;
+}
+
+
+#BOLDTEXTBIG {
+	-fx-font-family: "Arial Bold";
+	-fx-font-size: 12pt;
+    -fx-fill: lightgreen;
+    -fx-opacity: 0.9;
+}
+
+#CONSOLE {
+	-fx-control-inner-background: #1e1e1e;
+	-fx-font-family: Consolas; 
+	-fx-font-size: 8pt;
+	-fx-highlight-fill: lightgreen; 
+	-fx-highlight-text-fill: #000044; 
+	-fx-text-fill: lightyellow;
+}

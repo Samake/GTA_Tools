@@ -3,7 +3,7 @@ package com.gtasa.gui;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.gtasa.core.IPLParser;
+import com.gtasa.core.FileCache;
 import com.gtasa.main.Main;
 import com.gtasa.plain.GTALibrary;
 import com.gtasa.plain.GTAPlainIPL;
@@ -69,7 +69,7 @@ public class GUISources {
 	            }
 		});
 
-		GTALibrary library = IPLParser.getLibrary();
+		GTALibrary library = FileCache.getLibrary();
 		
 		if (library != null) {
 			for (GTAPlainIPL ipl : library.getIPLs()) {
@@ -111,7 +111,7 @@ public class GUISources {
 			}
 		}
 		
-		IMG img = IPLParser.getIMG();
+		IMG img = FileCache.getIMG();
 		
 		if (img != null) {
 			for (BinaryIPL ipl : img.getIPLs()) {

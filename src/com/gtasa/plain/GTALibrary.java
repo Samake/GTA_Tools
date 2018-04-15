@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.gtasa.core.FileSystem;
 import com.gtasa.gui.GUIConsole;
+import com.gtasa.main.Main;
 
 public class GTALibrary {
 	
@@ -28,6 +29,8 @@ public class GTALibrary {
 	private void loadIPLs() throws Exception {
 		File[] directoryList = FileSystem.readLibray(path);
     	
+		int count = 0;
+		
     	for (int i=0; i < directoryList.length; i++) {
     		if (directoryList[i] != null) {
     			if (directoryList[i].isDirectory() && directoryList[i].isAbsolute()) {
@@ -39,6 +42,9 @@ public class GTALibrary {
                 		if (fileList[j] != null) {
                 			if (fileList[j].toString().contains(".ipl")) {
                 				GTAPlainIPL ipl = new GTAPlainIPL(fileList[j].toString(), FileSystem.openIPL(fileList[j].toString()));
+                				count++;
+                				Main.setProgress(1 + (49 / 40) * count);
+                				
                 				this.iplFiles.add(ipl);
                 			}
                 		}

@@ -1,4 +1,4 @@
-package com.gtasa.core;
+package com.gtasa.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 public class PropertiesHandler {
-	
+
 	private static Properties mainProperties;
 	private static String gtaPath;
 	private static String modelIDS;

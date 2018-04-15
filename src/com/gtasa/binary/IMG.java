@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.gtasa.core.FileSystem;
 import com.gtasa.gui.GUIConsole;
+import com.gtasa.main.Main;
 
 public class IMG {
 	
@@ -34,6 +35,8 @@ public class IMG {
 		if (this.header != null) {
 			int index = this.header.getLength();
 			
+			int count = 0;
+			
 			for (int i = 0; i < this.header.getEntries(); i++) {
 				IMGDirectory directory = new IMGDirectory(Arrays.copyOfRange(this.img, index, index + DIRECTORYSIZE));
 				index = index + DIRECTORYSIZE;
@@ -43,6 +46,9 @@ public class IMG {
 					
 					if (new String(Arrays.copyOfRange(iplFile, 0, 4), StandardCharsets.ISO_8859_1).equals("bnry")) {
 						this.iplList.add(new BinaryIPL(directory, iplFile));
+						count++;
+						Thread.yield();
+						Main.setProgress(41 + (69 / 164) * count);
 					}
 				}
 			}

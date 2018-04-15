@@ -1,8 +1,10 @@
 package com.gtasa.gui;
 
 import java.io.File;
+
 import com.gtasa.core.IPLParser;
-import com.gtasa.core.PropertiesHandler;
+import com.gtasa.utils.PropertiesHandler;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -34,14 +36,14 @@ public class GUI {
 		pane.setPadding(new Insets(5, 10, 10, 10));
 		pane.setSpacing(5);
 		pane.setAlignment(Pos.TOP_LEFT);
-		
+
 		HBox firstRow = new HBox();
 		firstRow.setSpacing(4);
 		firstRow.setAlignment(Pos.TOP_LEFT);
 		
 		Label pathLabel = new Label("GTA Path: ");
 		pathLabel.setMinSize(65, 25);
-		
+
 		TextField pathField = new TextField(PropertiesHandler.getGTAPath());
 		pathField.setMinSize(500, 25);
 		
@@ -87,7 +89,7 @@ public class GUI {
 		
 		HBox thirdRow = new HBox();
 		thirdRow.setSpacing(4);
-		thirdRow.setAlignment(Pos.TOP_CENTER);
+		thirdRow.setAlignment(Pos.TOP_LEFT);
 		
 		Button parseButton = new Button();
 		parseButton.setText("Start search");

@@ -2,26 +2,18 @@ package com.gtasa.core;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.gtasa.binary.BinaryIPL;
-import com.gtasa.binary.IMG;
 import com.gtasa.container.CObject;
-import com.gtasa.defines.Common;
 import com.gtasa.gui.GUIConsole;
 import com.gtasa.math.Quaternion;
 import com.gtasa.math.Vector3;
-import com.gtasa.plain.GTALibrary;
 import com.gtasa.plain.GTAPlainIPL;
+import com.gtasa.utils.PropertiesHandler;
 
 public class IPLParser {
-	
-	private static IMG imgFile;
-	private static GTALibrary library;
 	
 	private static String[] modelIDs;
 	private static List<CObject> parsedObjects = new ArrayList<CObject>();
@@ -29,30 +21,6 @@ public class IPLParser {
 	public static void start() throws Exception {
 		GUIConsole.reset();
 		parsedObjects.clear();
-		
-		if (library == null) {
-			GUIConsole.output("Loading GTA library...");
-			library = new GTALibrary(PropertiesHandler.getGTAPath() + Common.GTA_SA_MAPS);
-			
-			if (library != null) {
-				GUIConsole.output("GTA Library were loaded sucessfully!");
-			} else {
-				GUIConsole.output("Loading GTA Library FAILED!");
-			}
-		}
-		
-		if (imgFile == null) {
-			GUIConsole.output("Loading gta3.img...");
-			Path path = Paths.get(PropertiesHandler.getGTAPath() + Common.GTA_SA_GTA_3_IMG);
-			
-			imgFile = new IMG(Files.readAllBytes(path));
-			
-			if (imgFile != null) {
-				GUIConsole.output("gta3.img were decompiled sucessfully!");
-			} else {
-				GUIConsole.output("Decompiling gta3.img FAILED!");
-			}
-		}
 		
 		modelIDs = PropertiesHandler.getModelIDs().split(",");
 		
@@ -66,8 +34,8 @@ public class IPLParser {
 	
 	private static void parseIPLFiles() throws Exception {
 		
-		if (library != null) {
-			for (GTAPlainIPL file : library.getIPLs()) {
+		if (FileCache.getLibrary() != null) {
+			for (GTAPlainIPL file : FileCache.getLibrary().getIPLs()) {
 				int count = 0;
 				
 				String fileContent = file.getIPL();
@@ -118,8 +86,8 @@ public class IPLParser {
 			}
 		}
 		
-		if (imgFile != null) {
-			for (BinaryIPL file : imgFile.getIPLs()) {
+		if (FileCache.getIMG() != null) {
+			for (BinaryIPL file : FileCache.getIMG().getIPLs()) {
 				int count = 0;
 				
 				String fileContent = file.getIPL();
@@ -171,13 +139,6 @@ public class IPLParser {
 		}
 	}
 	
-	public static IMG getIMG() {
-		return imgFile;
-	}
-	
-	public static GTALibrary getLibrary() {
-		return library;
-	}
 	
 	public static List<CObject> getSearchResults() {
 		return parsedObjects;

@@ -21,6 +21,7 @@ public class GUIConsole {
 		consoleArea = new TextArea();
 		consoleArea.setMinSize(620, 200);
 		consoleArea.setMaxSize(620, 200);
+		consoleArea.setId("CONSOLE");
 		
 		pane.getChildren().addAll(consoleArea);
 		
