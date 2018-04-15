@@ -29,7 +29,7 @@ public class PreLoad extends Preloader {
     private Stage preloaderStage;
     private Scene scene;
 
-    private Text status;
+    private static Text status;
     private Text progress;
 
     public PreLoad() {
@@ -105,5 +105,9 @@ public class PreLoad extends Preloader {
                 preloaderStage.hide();
                 break;
         }
+    }
+    
+    public static void setStatus(String text) {
+    	status.setText(text);
     }
 }

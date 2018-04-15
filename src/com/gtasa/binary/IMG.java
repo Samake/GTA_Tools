@@ -8,6 +8,7 @@ import java.util.List;
 import com.gtasa.core.FileSystem;
 import com.gtasa.gui.GUIConsole;
 import com.gtasa.main.Main;
+import com.gtasa.main.PreLoad;
 
 public class IMG {
 	
@@ -24,7 +25,6 @@ public class IMG {
 		
 		if (this.header != null) {
 			GUIConsole.output("Buffering binary ipl files from gta3.img");
-			
 			decompile();
 			GUIConsole.output(this.iplList.size() + " IPL files were decompiled");
 			
@@ -45,10 +45,16 @@ public class IMG {
 					byte[] iplFile = Arrays.copyOfRange(this.img, directory.getOffset(), directory.getOffset() + directory.getStreamingSize());
 					
 					if (new String(Arrays.copyOfRange(iplFile, 0, 4), StandardCharsets.ISO_8859_1).equals("bnry")) {
-						this.iplList.add(new BinaryIPL(directory, iplFile));
+						BinaryIPL ipl = new BinaryIPL(directory, iplFile);
+						
+						Thread.sleep(50);
+						
 						count++;
-						Thread.yield();
-						Main.setProgress(41 + (69 / 164) * count);
+						double progress = (50 * count) / 164;
+						Main.setProgress((double) 50 + progress);
+						PreLoad.setStatus("Caching binary ipl " + ipl.getName() + "...");
+						
+						this.iplList.add(ipl);
 					}
 				}
 			}

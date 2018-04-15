@@ -15,11 +15,13 @@ public class BinaryIPL {
 	private byte[] bytes;
 	private byte[] identifier = new byte[4];
 	private String ipl = "";
+	private String name;
 	private List<CBinaryObject> iplObjects = new ArrayList<CBinaryObject>();
 	
 	public BinaryIPL(IMGDirectory directory, byte[] content) throws Exception {
 		this.directory = directory;
 		this.bytes = content;
+		this.name = directory.getName();
 		
 		int index = 0;
 		System.arraycopy(this.bytes, index, this.identifier, 0, this.identifier.length);
@@ -76,6 +78,10 @@ public class BinaryIPL {
 	
 	public String getIPL() {
 		return this.ipl;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	public String getIdentifier() {

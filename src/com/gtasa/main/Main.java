@@ -35,8 +35,6 @@ public class Main extends Application {
 	private static Scene scene;
 	private static TabPane tabPane;
 
-    private static final int COUNT_LIMIT = 200000;
-
     private Stage applicationStage;
 
     public static void main(String[] args) {
@@ -51,6 +49,7 @@ public class Main extends Application {
     public void init() throws Exception {
 
         setProgress(0.0);
+        PreLoad.setStatus("Load properties...");
         PropertiesHandler.init();
         setProgress(1.0);
         
@@ -58,6 +57,7 @@ public class Main extends Application {
         	FileCache.init();
         } else {
         	//show path window
+        	//FileCache.init();
         }
         
         setProgress(100.0);

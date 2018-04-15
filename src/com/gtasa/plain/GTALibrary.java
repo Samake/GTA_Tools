@@ -7,6 +7,7 @@ import java.util.List;
 import com.gtasa.core.FileSystem;
 import com.gtasa.gui.GUIConsole;
 import com.gtasa.main.Main;
+import com.gtasa.main.PreLoad;
 
 public class GTALibrary {
 	
@@ -18,11 +19,7 @@ public class GTALibrary {
 		this.path = path;
 		
 		GUIConsole.output("Buffering plain IPL files from library");
-		
-		if (this.iplFiles == null || this.iplFiles.size() < 1) {
-			loadIPLs();
-		}
-		
+		loadIPLs();
 		GUIConsole.output(this.iplFiles.size() + " IPL files were found");
 	}
 	
@@ -42,8 +39,11 @@ public class GTALibrary {
                 		if (fileList[j] != null) {
                 			if (fileList[j].toString().contains(".ipl")) {
                 				GTAPlainIPL ipl = new GTAPlainIPL(fileList[j].toString(), FileSystem.openIPL(fileList[j].toString()));
+                				
                 				count++;
-                				Main.setProgress(1 + (49 / 40) * count);
+                				double progress = (49 * count) / 40;
+                				Main.setProgress((double) 1 + progress);
+                				PreLoad.setStatus("Caching plain ipl " + ipl.getName() + "...");
                 				
                 				this.iplFiles.add(ipl);
                 			}
